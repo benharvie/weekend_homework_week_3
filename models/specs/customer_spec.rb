@@ -17,4 +17,10 @@ class CustomerTest < MiniTest::Test
     @customer1.buy_ticket("Step Brothers") #Costs '10'
     assert_equal(80, @customer1.funds)
   end
+
+  # def test_tickets_bought_by_customer
+  #   @customer2.buy_ticket("Step Brothers")
+  #   @customer2.buy_ticket("Step Brothers")
+  #   assert_equal(2, @customer2.tickets_bought)
+  # end
 end

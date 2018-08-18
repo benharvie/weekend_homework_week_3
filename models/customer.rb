@@ -11,16 +11,7 @@ class Customer
 
 ###
 
-  #Buying tickets should decrease the funds of the customer by the price
-  def buy_ticket(film)
-    sql = "SELECT price FROM films
-          WHERE title = $1;"
-    values = [film]
-    film_cost = SqlRunner.run(sql, values)[0]["price"].to_i
-    @funds -= film_cost
-    update
-  end
-
+  #Returns films booked by customer
   def films
     sql = "SELECT films.*
     FROM films
@@ -29,6 +20,25 @@ class Customer
     WHERE tickets.customer_id = $1"
     values = [@id]
     SqlRunner.run(sql, values).map { |film_hash| Film.new(film_hash) }
+  end
+
+  #Buying tickets should decrease the funds of the customer by the price
+  def buy_ticket(film)
+    sql = "SELECT price FROM films
+          WHERE title = $1;"
+    values = [film]
+    film_cost = SqlRunner.run(sql, values)[0]["price"].to_i
+    @funds -= film_cost
+    update #Doesn't seem to work through test? Works in pry
+  end
+
+  #Check how many tickets were bought by a customer
+  def tickets_bought
+    sql = "SELECT COUNT(*)
+          FROM tickets
+          WHERE tickets.customer_id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)[0]["count"].to_i
   end
 
   ###
