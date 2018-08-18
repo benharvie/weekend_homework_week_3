@@ -9,6 +9,18 @@ class Customer
     @funds = options['funds'].to_i
   end
 
+###
+
+  #Buying tickets should decrease the funds of the customer by the price
+  def buy_ticket(film)
+    sql = "SELECT price FROM films
+          WHERE title = $1;"
+    values = [film]
+    film_cost = SqlRunner.run(sql, values)[0]["price"].to_i
+    @funds -= film_cost
+    update
+  end
+
   def films
     sql = "SELECT films.*
     FROM films
