@@ -29,7 +29,7 @@ class Customer
     update
   end
 
-  # def buy_ticket(film)
+  # def buy_ticket(film) # Alternative?
   #   sql = "SELECT price FROM films
   #         WHERE title = $1;"
   #   values = [film]
@@ -39,7 +39,7 @@ class Customer
   # end
 
   #Check how many tickets were bought by a customer
-  def tickets_bought # UNFINISHED, returns 0
+  def tickets_bought
     sql = "SELECT COUNT(*)
           FROM tickets
           WHERE tickets.customer_id = $1"
