@@ -24,16 +24,22 @@ class Customer
 
   #Buying tickets should decrease the funds of the customer by the price
   def buy_ticket(film)
-    sql = "SELECT price FROM films
-          WHERE title = $1;"
-    values = [film]
-    film_cost = SqlRunner.run(sql, values)[0]["price"].to_i
-    @funds -= film_cost
-    update #Doesn't seem to work through test? Works in pry
+    @funds -= film.price
+    Ticket.new({ 'customer_id' => @id, 'film_id' => film.id }).save
+    update
   end
 
+  # def buy_ticket(film)
+  #   sql = "SELECT price FROM films
+  #         WHERE title = $1;"
+  #   values = [film]
+  #   film_cost = SqlRunner.run(sql, values)[0]["price"].to_i
+  #   @funds -= film_cost
+  #   update #Doesn't seem to work through test? Works in pry
+  # end
+
   #Check how many tickets were bought by a customer
-  def tickets_bought
+  def tickets_bought # UNFINISHED, returns 0
     sql = "SELECT COUNT(*)
           FROM tickets
           WHERE tickets.customer_id = $1"

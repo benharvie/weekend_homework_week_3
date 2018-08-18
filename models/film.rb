@@ -19,6 +19,11 @@ class Film
     SqlRunner.run(sql, values).map { |customer_hash| Customer.new(customer_hash) }
   end
 
+  #Check how many customers are going to watch a certain film
+  def customer_count
+    customers.count
+  end
+
   ###
 
   def save
@@ -47,7 +52,7 @@ class Film
     values = [@id]
     SqlRunner.run(sql, values)
   end
-  
+
   ###
 
   def self.delete_all
