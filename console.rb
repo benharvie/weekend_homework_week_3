@@ -1,11 +1,15 @@
 require_relative 'models/customer'
 require_relative 'models/film'
 require_relative 'models/ticket'
+require_relative 'models/screening'
 require 'pry-byebug'
+
+### CLEAR ALL TABLES
 
 Ticket.delete_all
 Customer.delete_all
 Film.delete_all
+#Screening.delete_all
 
 ### CUSTOMERS
 
@@ -39,6 +43,17 @@ ticket2.save
 
 ticket3 = Ticket.new({ "customer_id" => customer3.id, "film_id" => film3.id })
 ticket3.save
+
+### SCREENINGS
+
+screening1 = Screening.new({ "show_time" => "13:10", "capacity" => "10", "film_id" => film1.id })
+screening1.save
+
+screening2 = Screening.new({ "show_time" => "16:20", "capacity" => "20", "film_id" => film2.id })
+screening2.save
+
+screening3 = Screening.new({ "show_time" => "20:45", "capacity" => "30", "film_id" => film3.id })
+screening3.save
 
 ###
 

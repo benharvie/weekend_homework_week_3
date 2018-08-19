@@ -1,4 +1,5 @@
 require_relative '../db/sql_runner'
+require_relative 'ticket'
 
 class Customer
   attr_accessor :name, :funds
