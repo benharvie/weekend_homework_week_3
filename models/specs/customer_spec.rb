@@ -31,7 +31,7 @@ class CustomerTest < MiniTest::Test
     @ticket1 = Ticket.new({ "customer_id" => @customer1.id, "film_id" => @film1.id })
     @ticket1.save
 
-    @ticket2 = Ticket.new({ "customer_id" => @customer1.id, "film_id" => @film2.id })
+    @ticket2 = Ticket.new({ "customer_id" => @customer2.id, "film_id" => @film2.id })
     @ticket2.save
 
     @ticket3 = Ticket.new({ "customer_id" => @customer3.id, "film_id" => @film3.id })
@@ -48,9 +48,10 @@ class CustomerTest < MiniTest::Test
   end
 
   def test_tickets_bought_by_customer
-    @customer2.buy_ticket(@film1)
-    @customer2.buy_ticket(@film2)
-    @customer2.buy_ticket(@film3)
-    assert_equal(3, @customer2.tickets_bought)
+    #customer2 already has 1 ticket
+    @customer2.buy_ticket(@film1) # +1
+    @customer2.buy_ticket(@film2) # +1
+    @customer2.buy_ticket(@film3) # +1
+    assert_equal(4, @customer2.tickets_bought) # = 4
   end
 end
